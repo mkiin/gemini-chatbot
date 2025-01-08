@@ -6,6 +6,7 @@
 	"service": "app",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
+		"ghcr.io/dhoeric/features/google-cloud-cli:1": {},
 		"ghcr.io/nils-geistmann/devcontainers-features/zsh:0": {
 			"setLocale": true,
 			"theme": "robbyrussell",

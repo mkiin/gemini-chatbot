@@ -10,11 +10,12 @@ import { user, chat, User, reservation } from "./schema";
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
 // https://authjs.dev/reference/adapter/drizzle
-let client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
+let client = postgres(`${process.env.POSTGRES_URL!}`);
 let db = drizzle(client);
 
 export async function getUser(email: string): Promise<Array<User>> {
   try {
+    console.log(email);
     return await db.select().from(user).where(eq(user.email, email));
   } catch (error) {
     console.error("Failed to get user from database");

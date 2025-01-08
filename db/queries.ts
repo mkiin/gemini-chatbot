@@ -2,16 +2,9 @@ import "server-only";
 
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { desc, eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { db } from "./drizzle";
 
 import { user, chat, User, reservation } from "./schema";
-
-// Optionally, if not using email/pass login, you can
-// use the Drizzle adapter for Auth.js / NextAuth
-// https://authjs.dev/reference/adapter/drizzle
-let client = postgres(`${process.env.POSTGRES_URL!}`);
-let db = drizzle(client);
 
 export async function getUser(email: string): Promise<Array<User>> {
   try {
@@ -95,7 +88,7 @@ export async function getChatById({ id }: { id: string }) {
     const [selectedChat] = await db.select().from(chat).where(eq(chat.id, id));
     return selectedChat;
   } catch (error) {
-    console.error("Failed to get chat by id from database");
+    console.error("Failed to get chat by id from database", error);
     throw error;
   }
 }

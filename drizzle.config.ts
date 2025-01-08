@@ -7,7 +7,7 @@ config({
 
 export default defineConfig({
   schema: "./db/schema.ts",
-  out: "./lib/drizzle",
+  out: "./drizzle",
   dialect: "postgresql",
   dbCredentials: {
     url: process.env.POSTGRES_URL!,
